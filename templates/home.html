@@ -13,8 +13,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 </head
 <body>
-<!--NavBar-->
-<nav class="navbar navbar-inverse navbar-fixed-top">
+ <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -23,19 +22,26 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">StudyWiz</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">LogIn</a></li>
-            <li><a href="#contact">Classes</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
+          <a class="navbar-brand" href="#">StudyWiz!</a>
     </nav>
 
 
+<div class="jumbotron" text-align: center>
+        <h1>Welcome to StudyWiz!</h1>
+        <p>A useful and innovative tool for uploading study guides</p>
+      </div>
+
+
+<div class="alert alert-success" role="alert" text-align: center>
+        <strong>Getting Started</strong> Click on classes and find a course you need help in, or upload your own guide!
+      </div>
+
+{% if user %}
+ <div class="alert alert-info" role="alert">
+        <strong>Hello</strong> You are currently logged in as {% user %}
+      </div>
+{% else %}
+<br><br>
 
 
 </body>
