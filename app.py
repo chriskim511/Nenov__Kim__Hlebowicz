@@ -10,14 +10,32 @@ db = client['studyData']
 accountDB = db['accounts']
 guideDB = db['guides']
 
+def curUser():
+    if loggedin(): 
+        return session["username"]
+    else: 
+        return "Anon"
+
+def loggedin():
+    return "username" in session
+
+def requirelogin(f):
+    @wraps(f)
+    def ff():
+        if loggedin():
+            return f()
+        else:
+            return redirect("/")
+        return ff
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("index.html",sess = session)
 
 @app.route("guides", methods=["GET","POST"])
 def guides():
-    return render_template("guides.html")
+    guideList = guideDB.find()
+    return render_template("guides.html",gList = guideList)
 
 @app.route("/stats")
 def stats():
