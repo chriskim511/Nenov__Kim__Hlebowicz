@@ -2,7 +2,7 @@ from flask import Flask,render_template, session, redirect, request, url_for, g,
 from functools import wraps
 from pymongo import MongoClient
 
-app = Flask(_name_)
+app = Flask(__name__)
 app.secret_key = "key"
 
 client = MongoClient()
