@@ -1,43 +1,56 @@
-<!DOCTYPE html> 
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css"> 
-    <link rel="stylesheet" href="static/login.css">
+    <title>Login Page</title>
+    
+    <!-- Bootstrap Core CSS -->
+    <link href="../static/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Signin CSS -->
+    <link rel="stylesheet" href="../static/signin.css">
+    
+    <style>
+      .form-signin input[type="password"] {
+      margin-bottom: 10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      }
+    </style>
   </head>
   <body>
-    <!-- Header -->
-    <div class="pure-g">
-      <div class="pure-u-1-1" id="login-header">
-	<p><center>Login</center></p>
-      </div>
+    <div class="container">
+      <form class="form-signin" role="form" method="POST">
+	<h1 class="form-signin-heading">Log in</h1>
+	<hr>
+
+	<!-- Flashed messages -->
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	<div class="alert alert-info">
+	  {{messages[0]}}
+	</div>
+	{% endif %}
+	{% endwith %}
+	{% block body %}
+	{% endblock %}
+
+	<!-- Username -->
+	<input type="text" class="form-control" name="username" placeholder = "Username" autofocus>
+	<br>
+	
+	<!-- Password -->
+	<input type="password" class="form-control" name="password" placeholder = "Password">
+	<br>
+	<br>
+
+	<!-- Login button -->
+	<button class="btn btn-lg btn-success btn-block" type="submit" name="b" value="Login">Login</button>
+	<br>
+	
+	<!-- Go to register -->
+	Create an account:
+	<button class="btn btn-lg btn-default btn-block" type="submit" name="b" value="Register">Register</button>
+      </form>
     </div>
-
- <!-- Form -->
-    <div class="pure-g" id="login-form">
-      <div class="pure-u-1-3"></div>
-      <div class="pure-u-1-3">
-	<form class="pure-form pure-form-aligned" action="login" method="POST">
-	  <fieldset>
-            <div class="pure-control-group">
-              <label for="username">Username</label>
-              <input id="username" type="text" placeholder="Username" name="username">
-            </div>
-
-            <div class="pure-control-group">
-              <label for="password">Password</label>
-              <input id="password" type="password" placeholder="Password" name="password">
-            </div>
-
-	    <div class="pure-controls">
-	      <button type="submit" class="pure-button pure-button-primary" name="login" id="hidebutton">Submit</button>
-	    </div>
-
-	  </fieldset>
-	</form>
-      </div>
-      <div class="pure-u-1-3"></div>
-    </div>
-
-    <center><a href="/home">Return to home</a></center<
-  </body> 
+  </body>
 </html>
