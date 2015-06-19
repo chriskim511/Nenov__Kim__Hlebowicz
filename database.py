@@ -64,7 +64,7 @@ def getClasses(subject):
     return classList
 
 def getGuides(classtitle):
-    result = classes.find({'subject': subject})
+    result = classes.find({'classname': classtitle})
     classList = []
     for post in result:
         miniClassList = []

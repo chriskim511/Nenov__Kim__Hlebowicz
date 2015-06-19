@@ -25,14 +25,15 @@ def login():
         return redirect(url_for('home'))
     return render_template("login.html")
 
-@app.route('/addc/', methods=["GET","POST"])
+@app.route('/addc', methods=["GET","POST"])
 def addc():
     if request.method == "POST":
-        classtitle = request.form["classtitle"]
+        classtitle = request.form["classname"]
         teachername = request.form["teachername"]
         subject = request.form["subject"]
         print database.addClass(classtitle,teachername,subject)
-    return redirect(url_for('home'))
+    return render_template("subjectdisplay.html",classes=database.getClasses(subject), subject=subject)
+
 
 @app.route('/subject/<subject>/', methods=["GET","POST"])
 def subject(subject):
