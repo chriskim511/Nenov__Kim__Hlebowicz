@@ -6,7 +6,7 @@ app.secret_key = 'lmao'
 @app.route('/home')
 def home():
     if 'username' in session:
-        return render_template("home.html", user = session['username'])
+        return render_template("maindisplay.html", user = session['username'])
     else:
         flash("You are not logged in")
         return redirect(url_for('login'))
@@ -24,6 +24,10 @@ def login():
         session['username'] = request.form['username']
         return redirect(url_for('home'))
     return render_template("login.html")
+
+@app.route('/subject/<subject>/')
+def subject(subject):
+    return render_template("subjectdisplay.html",classes=database.getClasses(subject), subject=subject)
 
 @app.route('/signup', methods=["GET","POST"])
 def signup():
