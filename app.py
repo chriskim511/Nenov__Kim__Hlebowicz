@@ -32,7 +32,7 @@ def addc():
         teachername = request.form["teachername"]
         subject = request.form["subject"]
         print database.addClass(classtitle,teachername,subject)
-    return render_template("subjectdisplay.html",classes=database.getClasses(subject), subject=subject)
+    return redirect(url_for('home'))
 
 @app.route('/subject/<subject>/', methods=["GET","POST"])
 def subject(subject):
