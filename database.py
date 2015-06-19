@@ -18,8 +18,8 @@ def checkUsername(usernameToCheck):
 def checkClass(classnameToCheck,teacherToCheck):
     return ((len(classnameToCheck)) > 0) and ((len(teacherToCheck)) > 0) and (classes.find({"classname":classnameToCheck}).count()==0)
 
-def checkGuide(titleToCheck, urlToCheck, userwhopostedToCheck):
-    return (len(titleToCheck) > 0) and (len(urlToCheck) > 0) and (len(userwhopostedToCheck) > 0) and (guides.find({"title":titleToCheck,"url":urlToCheck, "userwhoposted":userwhopostedToCheck}).count()==0)
+def checkGuide(titleToCheck, urlToCheck, userwhopostedToCheck, classtitleToCheck):
+    return (len(titleToCheck) > 0) and (len(urlToCheck) > 0) and (len(userwhopostedToCheck) > 0) and (len(classtitleToCheck) > 0) and (guides.find({"title":titleToCheck,"url":urlToCheck, "userwhoposted":userwhopostedToCheck,"classtitle":classtitleToCheck}).count()==0)
 
 def addUser(username, password):
     record = users.find({"username":username})
@@ -45,7 +45,7 @@ def addClass (classname, teacher, subject):
         classes.insert(newClass)
         return True
 
-def addGuide (title, url, votes, userwhoposted):
+def addGuide (title, url, votes, userwhoposted, classtitle):
     if (checkGuide(title, url, userwhoposted) == False):
         return False
     else:
@@ -61,17 +61,23 @@ def getClasses(subject):
         miniClassList.append(post['classname'])
         miniClassList.append(post['teacher'])
         classList.append(miniClassList)
+    return classList
+
+def getGuides(classtitle):
+    result = classes.find({'subject': subject})
+    classList = []
+    for post in result:
+        miniClassList = []
+        miniClassList.append(post['classname'])
+        miniClassList.append(post['teacher'])
+        classList.append(miniClassList)
     return classList  
 
-classes.drop()
 addClass('AP Econ', 'Schweitz', 'Social Studies')
 addClass('AP Econ', 'Schweitz', 'Social Studies')
 addClass('AP Math', 'Schweitz', 'Math')
 addClass('AP Math 2', 'Aviggy', 'Math')
 addClass('AP Math 2', 'Ye', 'History')
-
-for guide in classes.find():
-    print guide
 
 
 

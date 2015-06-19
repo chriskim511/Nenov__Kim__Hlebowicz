@@ -25,9 +25,23 @@ def login():
         return redirect(url_for('home'))
     return render_template("login.html")
 
-@app.route('/subject/<subject>/')
+@app.route('/addc/', methods=["GET","POST"])
+def addc():
+    if request.method == "POST":
+        classtitle = request.form["classtitle"]
+        teachername = request.form["teachername"]
+        subject = request.form["subject"]
+        print database.addClass(classtitle,teachername,subject)
+    return render_template("subjectdisplay.html",classes=database.getClasses(subject), subject=subject)
+
+@app.route('/subject/<subject>/', methods=["GET","POST"])
 def subject(subject):
     return render_template("subjectdisplay.html",classes=database.getClasses(subject), subject=subject)
+
+@app.route('/class/<classtitle>/')
+def classtitle(classtitle):
+    return render_template("classdisplay.html",guides=database.getGuides(classtitle), classtitle=classtitle)
+
 
 @app.route('/signup', methods=["GET","POST"])
 def signup():
