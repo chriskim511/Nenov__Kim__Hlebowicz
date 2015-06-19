@@ -45,12 +45,12 @@ def addClass (classname, teacher, subject):
         classes.insert(newClass)
         return True
 
-def addGuide (title, url, votes, userwhoposted, classtitle):
-    if (checkGuide(title, url, userwhoposted) == False):
+def addGuide (title, url, userwhoposted, classtitle):
+    if (checkGuide(title, url, userwhoposted, classtitle) == False):
         return False
     else:
-        newClass = {"classname": classname,"teacher": teacher}
-        classes.insert(newClass)
+        newGuide = {"title": title,"url": url, "userwhoposted":userwhoposted, "classtitle":classtitle}
+        guides.insert(newGuide)
         return True
 
 def getClasses(subject):
@@ -64,14 +64,15 @@ def getClasses(subject):
     return classList
 
 def getGuides(classtitle):
-    result = classes.find({'classname': classtitle})
-    classList = []
-    for post in result:
-        miniClassList = []
-        miniClassList.append(post['classname'])
-        miniClassList.append(post['teacher'])
-        classList.append(miniClassList)
-    return classList  
+    result = guides.find({'classtitle': classtitle})
+    guideList = []
+    for guide in result:
+        miniGuideList = []
+        miniGuideList.append(guide['title'])
+        miniGuideList.append(guide['url'])
+        miniGuideList.append(guide['userwhoposted'])
+        guideList.append(miniGuideList)
+    return guideList  
 
 addClass('AP Econ', 'Schweitz', 'Social Studies')
 addClass('AP Econ', 'Schweitz', 'Social Studies')

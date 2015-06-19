@@ -1,5 +1,8 @@
 from flask import Flask, session, flash, redirect, render_template, request, url_for
 import database
+import os
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+from werkzeug import secure_filename
 app = Flask(__name__)
 app.secret_key = 'lmao' 
 
@@ -31,9 +34,20 @@ def addc():
         classtitle = request.form["classname"]
         teachername = request.form["teachername"]
         subject = request.form["subject"]
-        print database.addClass(classtitle,teachername,subject)
+        database.addClass(classtitle,teachername,subject)
     return render_template("subjectdisplay.html",classes=database.getClasses(subject), subject=subject)
 
+@app.route('/addg', methods=["GET","POST"])
+def addg():
+    classtitle = request.form["classtitle"]
+    title = request.form["title"]
+    userwhoposted = session['username']
+    file = request.files['file']
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    database.addGuide(title,'/uploads/'+filename,userwhoposted,classtitle)
+    return render_template("classdisplay.html",guides=database.getGuides(classtitle), classtitle=classtitle)
 
 @app.route('/subject/<subject>/', methods=["GET","POST"])
 def subject(subject):
@@ -65,6 +79,20 @@ def guides():
 @app.route('/studyguides/<classname>')
 def showClassGuides():
     return render_template('classguides.html',classname=classname)
+
+
+
+app.config['UPLOAD_FOLDER'] = 'uploads/'
+app.config['ALLOWED_EXTENSIONS'] = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'doc', 'docx', 'odt', 'ppt'])
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']    
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
 
 if __name__ == '__main__':
     app.run(debug=True)

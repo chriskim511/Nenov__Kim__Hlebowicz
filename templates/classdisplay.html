@@ -81,17 +81,21 @@
 				       <div class="col-lg-12">
                         {% for guide in guides %}
 			             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-				       <a class="thumbnail" href=''>
+				       <a class="thumbnail" href='{{guide[1]}}'>
 				       
-			             <p>  </p>
-                         <p>  </p>
-			 </a>
+			             <p> {{guide[0]}} </p>
+                         <p> by {{guide[2]}} </p>
+			           </a>
 			             </div>
                         {% endfor %}
                         <div class="col-lg-3 col-md-4 col-xs-6 thumbnail">
-                        <form action="upload" method="post" enctype="multipart/form-data">
-                        <input type="file" name="file"><br /><br />
-                        <input type="submit" value="Upload">
+                        <form method="post" action="/addg" enctype="multipart/form-data">
+                  Title:<input type="text" name="title">
+                  <input type="hidden" name="classtitle" value="{{classtitle}}">
+                  <input type="file" name="file">
+                  <button type="submit" class="btn btn-default">
+                    Add Guide
+                  </button>
                         </form>
                         </div>
 
