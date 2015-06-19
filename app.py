@@ -3,18 +3,15 @@ import database
 app = Flask(__name__)
 app.secret_key = 'lmao' 
 
-def login(username):
-    session['username'] = username
-    return
-
-#def validLogin(user,password):
-    #Check database to see if user exists
-
-@app.route('/')
+@app.route('/home')
 def home():
-    return render_template('home.html') 
+    if 'username' in session:
+        return render_template("home.html", user = session['username'])
+    else:
+        flash("You are not logged in")
+        return redirect(url_for('login'))
 
-@app.route('/login', methods=["GET","POST"])
+@app.route('/', methods=["GET","POST"])
 def login():
     error = None
     if request.method == "POST":
@@ -22,7 +19,7 @@ def login():
         password = request.form["password"]
         if(database.validateUser(username,password) == False):
             error = 'Unregistered username or incorrect password'
-            return redirect(url_for('home'))
+            return redirect(url_for('login'))
         flash("You've logged in successfully")
         session['username'] = request.form['username']
         return redirect(url_for('home'))

@@ -16,10 +16,10 @@ def checkUsername(usernameToCheck):
     return ((len(usernameToCheck) > 0) and (users.find({"username":usernameToCheck}).count()==0))
 
 def checkClass(classnameToCheck,teacherToCheck):
-    return ((len(classnameToCheck) > 0) and ((len(teacherToCheck) > 0) and (classes.find({"classname":classnameToCheck,"teacher":teacherToCheck}).count()==0))
+    return ((len(classnameToCheck)) > 0) and ((len(teacherToCheck)) > 0) and (classes.find({"classname":classnameToCheck,"teacher":teacherToCheck}).count()==0)
 
 def checkGuide(titleToCheck, urlToCheck, userwhopostedToCheck):
-    return ((len(titleToCheck) > 0) and ((len(urlToCheck) > 0) and ((len(userwhopostedToCheck) > 0) and (guides.find({"title":titleToCheck,"url":urlToCheck, "userwhoposted":userwhopostedToCheck}).count()==0))
+    return (len(titleToCheck) > 0) and (len(urlToCheck) > 0) and (len(userwhopostedToCheck) > 0) and (guides.find({"title":titleToCheck,"url":urlToCheck, "userwhoposted":userwhopostedToCheck}).count()==0)
 
 def addUser(username, password):
     record = users.find({"username":username})
@@ -61,7 +61,7 @@ def getClasses(subject):
         miniClassList.append(post['classname'])
         miniClassList.append(post['teacher'])
         classList.append(miniClassList)
-    return classList    
+    return classList  
 
 
 
