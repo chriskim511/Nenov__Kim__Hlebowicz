@@ -5,5 +5,6 @@ A crowd-sourcing site for uploading notes and study materials:
 Whenever a user uploads items to the site, depending on the amount of upvotes received, the user will acquire points and will be able to use these points to download other people's notes and study materials in the site. 
 
 Website: http://45.55.74.197:8000/
-Video Link: 
+
+Video Link: https://www.youtube.com/watch?v=xYvUIbHUzdw&feature=youtu.be
 
