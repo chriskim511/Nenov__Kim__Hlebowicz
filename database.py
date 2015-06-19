@@ -16,7 +16,7 @@ def checkUsername(usernameToCheck):
     return ((len(usernameToCheck) > 0) and (users.find({"username":usernameToCheck}).count()==0))
 
 def checkClass(classnameToCheck,teacherToCheck):
-    return ((len(classnameToCheck)) > 0) and ((len(teacherToCheck)) > 0) and (classes.find({"classname":classnameToCheck,"teacher":teacherToCheck}).count()==0)
+    return ((len(classnameToCheck)) > 0) and ((len(teacherToCheck)) > 0) and (classes.find({"classname":classnameToCheck}).count()==0)
 
 def checkGuide(titleToCheck, urlToCheck, userwhopostedToCheck):
     return (len(titleToCheck) > 0) and (len(urlToCheck) > 0) and (len(userwhopostedToCheck) > 0) and (guides.find({"title":titleToCheck,"url":urlToCheck, "userwhoposted":userwhopostedToCheck}).count()==0)
@@ -62,6 +62,19 @@ def getClasses(subject):
         miniClassList.append(post['teacher'])
         classList.append(miniClassList)
     return classList  
+
+classes.drop()
+addClass('AP Econ', 'Schweitz', 'Social Studies')
+addClass('AP Econ', 'Schweitz', 'Social Studies')
+addClass('AP Math', 'Schweitz', 'Math')
+addClass('AP Math 2', 'Aviggy', 'Math')
+addClass('AP Math 2', 'Ye', 'History')
+
+for guide in classes.find():
+    print guide
+
+
+
 
 
 
