@@ -15,8 +15,11 @@ def checkPassword(passwordToCheck):
 def checkUsername(usernameToCheck):
     return ((len(usernameToCheck) > 0) and (users.find({"username":usernameToCheck}).count()==0))
 
-def checkPost(postToCheck):
-    return len(postToCheck) > 0
+def checkClass(classnameToCheck,teacherToCheck):
+    return ((len(classnameToCheck) > 0) and ((len(teacherToCheck) > 0) and (classes.find({"classname":classnameToCheck,"teacher":teacherToCheck}).count()==0))
+
+def checkGuide(titleToCheck, urlToCheck, userwhopostedToCheck):
+    return ((len(titleToCheck) > 0) and ((len(urlToCheck) > 0) and ((len(userwhopostedToCheck) > 0) and (guides.find({"title":titleToCheck,"url":urlToCheck, "userwhoposted":userwhopostedToCheck}).count()==0))
 
 def addUser(username, password):
     record = users.find({"username":username})
@@ -33,6 +36,32 @@ def validateUser(username, password):
         return False
     else:
         return record[0]['password'] == hashlib.sha512(password).hexdigest()
+
+def addClass (classname, teacher, subject):
+    if (checkClass(classname, teacher) == False):
+        return False
+    else:
+        newClass = {"classname": classname,"teacher": teacher,"subject": subject}
+        classes.insert(newClass)
+        return True
+
+def addGuide (title, url, votes, userwhoposted):
+    if (checkGuide(title, url, userwhoposted) == False):
+        return False
+    else:
+        newClass = {"classname": classname,"teacher": teacher}
+        classes.insert(newClass)
+        return True
+
+def getClasses(subject):
+    result = classes.find({'subject': subject})
+    classList = []
+    for post in result:
+        miniClassList = []
+        miniClassList.append(post['classname'])
+        miniClassList.append(post['teacher'])
+        classList.append(miniClassList)
+    return classList    
 
 
 
