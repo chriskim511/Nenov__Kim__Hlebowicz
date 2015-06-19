@@ -73,16 +73,3 @@ def getGuides(classtitle):
         miniGuideList.append(guide['userwhoposted'])
         guideList.append(miniGuideList)
     return guideList  
-
-addClass('AP Econ', 'Schweitz', 'Social Studies')
-addClass('AP Econ', 'Schweitz', 'Social Studies')
-addClass('AP Math', 'Schweitz', 'Math')
-addClass('AP Math 2', 'Aviggy', 'Math')
-addClass('AP Math 2', 'Ye', 'History')
-
-
-
-
-
-
-

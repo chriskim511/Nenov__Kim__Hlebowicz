@@ -23,7 +23,6 @@ def login():
         if(database.validateUser(username,password) == False):
             error = 'Unregistered username or incorrect password'
             return redirect(url_for('login'))
-        flash("You've logged in successfully")
         session['username'] = request.form['username']
         return redirect(url_for('home'))
     return render_template("login.html")
